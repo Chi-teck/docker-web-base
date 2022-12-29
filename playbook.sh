@@ -6,7 +6,7 @@ playbooks="$*"
 
 # Collect dependencies
 for playbook in $playbooks; do
-  dir="/tmp/playbooks/$playbook"
+  dir="/usr/lib/playbooks/$playbook"
   if [ -f $dir/dependencies.txt ]; then
     playbooks="$(cat $dir/dependencies.txt) $playbooks"
   fi
@@ -15,7 +15,7 @@ playbooks=$(echo -e "${playbooks// /\\n}" | awk '!a[$0]++')
 
 # Check.
 for playbook in $playbooks; do
-  if [[ ! -d /tmp/playbooks/$playbook ]]; then
+  if [[ ! -d /usr/lib/playbooks/$playbook ]]; then
     echo -e "\e[91mPlaybook ${playbook} does not exists.\e[0m" >&2
     exit 1
   fi
@@ -29,7 +29,7 @@ done
 
 # Pre-install.
 for playbook in $playbooks; do
-  dir="/tmp/playbooks/$playbook"
+  dir="/usr/lib/playbooks/$playbook"
   if [ -f $dir/pre-install.sh ]; then
     echo "🚩 Pre-install $playbook"
     DIR=$dir source "$dir/pre-install.sh"
@@ -38,7 +38,7 @@ done
 
 # Install.
 for playbook in $playbooks; do
-  dir="/tmp/playbooks/$playbook"
+  dir="/usr/lib/playbooks/$playbook"
   if [ -f $dir/install.sh ]; then
     echo "🚩 Install $playbook"
     DIR=$dir source "$dir/install.sh"
@@ -47,7 +47,7 @@ done
 
 # Post-install.
 for playbook in $playbooks; do
-  dir="/tmp/playbooks/$playbook"
+  dir="/usr/lib/playbooks/$playbook"
   if [ -f $dir/post-install.sh ]; then
     echo "🚩 Post-install $playbook"
     DIR=$dir source "$dir/post-install.sh"
@@ -57,7 +57,7 @@ done
 # Configure services.
 for playbook in $playbooks; do
   echo "🚩 Configure services for $playbook"
-  dir="/tmp/playbooks/$playbook"
+  dir="/usr/lib/playbooks/$playbook"
   if [ -f $dir/start.sh ]; then
     envsubst < "$dir/start.sh" > /root/start/$playbook.sh
   fi
