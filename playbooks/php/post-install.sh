@@ -15,4 +15,5 @@ if [[ -n ${PLAYBOOK_MAILHOG:-} ]]; then
 fi
 
 # Xdebug is not loaded at system boot to avoid performance impact.
+cat /usr/local/bin/xdebug
 xdebug off

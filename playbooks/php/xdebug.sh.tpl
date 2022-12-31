@@ -19,9 +19,9 @@ else
   exit 1
 fi
 
-if [[ $SERVER == 'apache' ]]; then
+if [[ ${SERVER:-} == 'apache' ]]; then
   # Apache fails with "signal Segmentation fault" when reload is used.
   service apache2 restart
-elif [[ $SERVER == 'nginx' ]]; then
+elif [[ ${SERVER:-} == 'nginx' ]]; then
   service nginx reload
 fi

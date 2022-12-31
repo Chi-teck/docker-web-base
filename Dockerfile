@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
 
-RUN apt-get update && apt-get install --yes runit
+RUN apt-get update
 
 #--------------------
 COPY playbook.sh /usr/bin/playbook

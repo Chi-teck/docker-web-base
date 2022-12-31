@@ -5,6 +5,7 @@ set -Eeuo pipefail
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 
+
 apt-get update && apt-get -y install \
     php$PHP_VERSION \
     php$PHP_VERSION-apcu \
@@ -41,5 +42,5 @@ elif [[ ${PLAYBOOK_PHP_FPM:-} ]]; then
 fi
 
 # shellcheck disable=SC2016
-SERVER=$server envsubst '$SERVER, $PHP_VERSION' < $DIR/xdebug.sh.tpl > /usr/local/bin/xdebug
+SERVER="$server" envsubst '$SERVER, $PHP_VERSION' < $DIR/xdebug.sh.tpl > /usr/local/bin/xdebug
 chmod +x /usr/local/bin/xdebug

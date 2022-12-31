@@ -18,7 +18,6 @@ apt-get -y install \
     tree \
     ncdu \
     rsync \
-    html2text \
     less \
     bat \
     bash-completion

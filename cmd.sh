@@ -8,7 +8,7 @@ function stop_services {
     # shellcheck disable=SC1090
     source $cmd;
   done
-  date +'Started at %c.'
+  date +'Stopped at %c.'
   exit
 }
 trap 'stop_services' exit
