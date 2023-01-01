@@ -14,6 +14,3 @@ if [[ -n ${PLAYBOOK_MAILHOG:-} ]]; then
   echo 'sendmail_path = /usr/local/bin/mhsendmail' >> /etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
 fi
 
-# Xdebug is not loaded at system boot to avoid performance impact.
-cat /usr/local/bin/xdebug
-xdebug off

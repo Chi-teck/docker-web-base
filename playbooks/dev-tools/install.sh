@@ -23,7 +23,7 @@ apt-get -y install \
     bash-completion
 
 # Install HR.
-wget  --quiet https://raw.githubusercontent.com/LuRsT/hr/master/hr
+wget --quiet https://raw.githubusercontent.com/LuRsT/hr/master/hr
 chmod +x hr
 mv hr /usr/local/bin/
 
