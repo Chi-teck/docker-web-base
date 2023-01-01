@@ -19,7 +19,11 @@ apt-get update && apt-get -y install \
     php$PHP_VERSION-xml \
     php$PHP_VERSION-zip
 
-cp $DIR/30-local-cli.ini /etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
+ini_file=/etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
+cp $DIR/30-local.ini $ini_file
+if [[ -n ${PLAYBOOK_MAILHOG:-} ]]; then
+  echo 'sendmail_path = /usr/local/bin/mhsendmail' >> $ini_file
+fi
 
 # Xdebug is not loaded at system boot to avoid performance impact.
 phpdismod -v $PHP_VERSION xdebug

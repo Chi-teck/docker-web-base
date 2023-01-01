@@ -10,7 +10,3 @@ if [[ -n  ${PLAYBOOK_POSTGRESQL:-} ]]; then
   apt install php$PHP_VERSION-pgsql
 fi
 
-if [[ -n ${PLAYBOOK_MAILHOG:-} ]]; then
-  echo 'sendmail_path = /usr/local/bin/mhsendmail' >> /etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
-fi
-

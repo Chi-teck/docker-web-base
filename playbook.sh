@@ -22,10 +22,13 @@ for playbook in $playbooks; do
 done
 
 # Export playbooks.
+echo 'Playbooks to be installed'
 for playbook in $playbooks; do
+  echo " • $playbook"
   # shellcheck disable=SC2046
   export PLAYBOOK_$(echo $playbook | tr '[:lower:]' '[:upper:]' | tr - _)=1
 done
+echo
 
 # Pre-install.
 for playbook in $playbooks; do
