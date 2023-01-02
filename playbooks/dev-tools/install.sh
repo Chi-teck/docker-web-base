@@ -3,8 +3,8 @@
 set -Eeuo pipefail
 
 apt-get -y install \
-    net-tools \
     apt-utils \
+    net-tools \
     procps \
     gnupg \
     git \
@@ -23,18 +23,15 @@ apt-get -y install \
     bash-completion
 
 # Install HR.
-wget --quiet https://raw.githubusercontent.com/LuRsT/hr/master/hr
-chmod +x hr
-mv hr /usr/local/bin/
+wget -q https://raw.githubusercontent.com/LuRsT/hr/master/hr -O /usr/local/bin/hr
+chmod +x /usr/local/bin/hr
 
 # Rename Bat.
 mv /usr/bin/batcat /usr/bin/bat
 
 # Install Task.
 URL=$(curl -s /tmp https://api.github.com/repos/go-task/task/releases/latest | grep "browser_download_url.*task_linux_amd64\.deb" | cut -d : -f 2,3 | tr -d \")
-wget  --quiet -P /tmp $URL && dpkg -i /tmp/task_linux_amd64.deb
-# @todo Is it still needed?
-cp $DIR/task.complete.sh /etc/bash_completion.d/task.complete.sh
+wget -q -P /tmp $URL && dpkg -i /tmp/task_linux_amd64.deb && rm /tmp/task_linux_amd64.deb
 
 # Configuration.
 cp $DIR/vimrc /etc/vim/vimrc.local

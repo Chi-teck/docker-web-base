@@ -4,7 +4,7 @@ set -Eeuo pipefail
 
 if [ -f /var/lib/mysql/docker-initialized ]; then
   echo 'Starting with existing MySQL data.'
-  mysqld -user=mysql &
+  mysqld --user=mysql &
 else
   echo 'Initializing MySQL data.'
   cp -a /var/lib/mysql_init/. /var/lib/mysql
@@ -14,6 +14,6 @@ CREATE USER '$MYSQL_USER'@'%' IDENTIFIED WITH caching_sha2_password BY '$MYSQL_P
 GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%';
 FLUSH PRIVILEGES;
 SQL
-  mysqld -user=mysql --init-file=/var/lib/mysql_init/init.sql &
+  mysqld --user=mysql --init-file=/var/lib/mysql_init/init.sql &
   touch /var/lib/mysql/docker-initialized
 fi

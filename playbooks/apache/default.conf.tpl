@@ -2,12 +2,12 @@
 
   ServerName localhost
   ServerAdmin webmaster@localhost
-  DocumentRoot /var/www
+  DocumentRoot ${WEB_ROOT}
 
   ErrorLog ${APACHE_LOG_DIR}/error.log
   CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-  <Directory /var/www/>
+  <Directory ${WEB_ROOT}/>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Order allow,deny

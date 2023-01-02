@@ -13,13 +13,12 @@ apt-get -y install \
   apt-transport-https \
   lsb-release \
   ca-certificates \
-  dumb-init \
   gettext
 
 DIR=$(dirname -- "${BASH_SOURCE[0]}")
 
 # Install shell template engine.
-wget --quiet -O /usr/local/bin/esh https://raw.githubusercontent.com/jirutka/esh/v0.3.2/esh \
+wget -q -O /usr/local/bin/esh https://raw.githubusercontent.com/jirutka/esh/v0.3.2/esh \
     && echo '9084e3e8e70e4ea81c40cd1cf85559196c0fa2cc /usr/local/bin/esh' | sha1sum -c || exit 1
 chmod +x /usr/local/bin/esh
 

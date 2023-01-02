@@ -17,7 +17,7 @@ COPY my-settings.ini /etc/php/${PHP_VERSION}/fpm/conf.d/30-local.ini
 COPY my-settings.ini /etc/php/${PHP_VERSION}/apache2/conf.d/30-local.ini
 ```
 
-### Configuration
+### Xdebug
 Xdebug is not loaded by default. Use the following command to enable it when needed.
 ```
 sudo xdebug on
