@@ -25,9 +25,6 @@ if [[ -n ${PLAYBOOK_MAILHOG:-} ]]; then
   echo 'sendmail_path = /usr/local/bin/mhsendmail' >> $ini_file
 fi
 
-# Xdebug is not loaded at system boot to avoid performance impact.
-phpdismod -v $PHP_VERSION xdebug
-
 # Install Composer.
 cd /tmp
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"

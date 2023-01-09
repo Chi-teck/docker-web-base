@@ -4,6 +4,7 @@ set -Eeuo pipefail
 
 apt-get -y install \
     apt-utils \
+    apache2-utils \
     net-tools \
     procps \
     gnupg \
@@ -11,7 +12,6 @@ apt-get -y install \
     vim \
     mc \
     silversearcher-ag \
-    bsdmainutils \
     man \
     jq \
     patch \
