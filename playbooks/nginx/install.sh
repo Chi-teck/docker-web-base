@@ -4,9 +4,9 @@ set -Eeuo pipefail
 
 apt-get -y install nginx
 
-if [ -z $PHP_VERSION ]; then
-  TEMPLATE=$DIR/default.tpl
-else
+if [[ -n ${PLAYBOOK_PHP_FPM:-} ]]; then
   TEMPLATE=$DIR/default-php.tpl
+else
+  TEMPLATE=$DIR/default.tpl
 fi
 envsubst '$WEB_ROOT, $PHP_VERSION' < $TEMPLATE > /etc/nginx/sites-available/default
