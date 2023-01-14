@@ -1,0 +1,11 @@
+## PHP-FPM playbook
+
+### Configuration
+
+In order to override default PHP settings create settings file and copy it to the PHP configuration directory as follows.
+```
+COPY my-settings.ini /etc/php/${PHP_VERSION}/fpm/conf.d/30-local.ini
+```
+
+### Xdebug
+See [PHP playbook](../php/README.md) on how to enable Xdebug.
