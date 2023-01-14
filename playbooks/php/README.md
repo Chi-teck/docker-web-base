@@ -7,7 +7,7 @@
 ### Configuration
 
 In order to override default PHP settings create settings file and copy it to the PHP configuration directory as follows.
-```
+```Dockerfile
 COPY my-settings.ini /etc/php/${PHP_VERSION}/cli/conf.d/30-local.ini
 ```
 
