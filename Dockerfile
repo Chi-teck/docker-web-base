@@ -16,5 +16,4 @@ RUN /tmp/base/install.sh && rm -r /tmp/base
 
 #--------------------
 COPY cmd.sh /root/cmd.sh
-RUN chmod +x /root/cmd.sh
 CMD ["/root/cmd.sh"]
