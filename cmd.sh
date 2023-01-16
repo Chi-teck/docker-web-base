@@ -20,7 +20,9 @@ for cmd in /root/start/*.sh; do
 done
 
 date +'Started at %c.'
-while (( 1 )); do
-  sleep 1
+while :
+do
+  sleep infinity &
+  wait $!
 done
 
