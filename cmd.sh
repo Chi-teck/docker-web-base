@@ -8,7 +8,7 @@ function stop_services {
     # shellcheck disable=SC1090
     source $cmd;
   done
-  date +'Stopped at %c.'
+  date +'🏁 Stopped at %c.'
   exit
 }
 trap 'stop_services' exit
@@ -19,9 +19,8 @@ for cmd in /root/start/*.sh; do
   source $cmd;
 done
 
-date +'Started at %c.'
-while :
-do
+date +'🏁 Started at %c.'
+while : ; do
   sleep infinity &
   wait $!
 done
