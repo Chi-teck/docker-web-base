@@ -19,10 +19,8 @@ for cmd in /root/start/*.sh; do
   # shellcheck disable=SC1090
   source $cmd;
 done
-
 date +'🏁 Started at %c.'
-while : ; do
-  sleep infinity &
-  wait $!
-done
+
+sleep infinity &
+wait $!
 
