@@ -5,6 +5,7 @@ set -Eeuo pipefail
 apt-get -y install \
     apt-utils \
     apache2-utils \
+    iputils-ping \
     net-tools \
     procps \
     gnupg \

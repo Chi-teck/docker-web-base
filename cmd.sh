@@ -4,6 +4,7 @@ set -Eeuo pipefail
 shopt -s nullglob
 
 function stop_services {
+  echo
   for cmd in /root/stop/*.sh; do
     # shellcheck disable=SC1090
     source $cmd;
