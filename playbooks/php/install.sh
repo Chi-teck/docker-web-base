@@ -32,6 +32,7 @@ php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a6110855
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
+composer completion bash > /etc/bash_completion.d/composer
 
 # Install Symfony CLI.
 curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash

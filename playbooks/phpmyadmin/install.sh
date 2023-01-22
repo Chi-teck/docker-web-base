@@ -5,8 +5,8 @@ set -Eeuo pipefail
 phpmyadmin_version='5.2.0'
 
 # Install PhpMyAdmin.
-wget https://files.phpmyadmin.net/phpMyAdmin/$phpmyadmin_version/phpMyAdmin-$phpmyadmin_version-all-languages.zip
-unzip phpMyAdmin-$phpmyadmin_version-all-languages.zip
+wget -q https://files.phpmyadmin.net/phpMyAdmin/$phpmyadmin_version/phpMyAdmin-$phpmyadmin_version-all-languages.zip
+unzip -q phpMyAdmin-$phpmyadmin_version-all-languages.zip
 mv phpMyAdmin-$phpmyadmin_version-all-languages /usr/share/phpmyadmin
 rm phpMyAdmin-$phpmyadmin_version-all-languages.zip
 
