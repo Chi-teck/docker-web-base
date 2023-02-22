@@ -11,6 +11,7 @@ apt update && apt install -y mysql-server
 rm $file
 
 echo 'user = mysql' >> /etc/mysql/mysql.conf.d/mysqld.cnf
+echo 'skip-log-bin' >> /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # Preserve default MySQL data.
 cp -a /var/lib/mysql /var/lib/mysql_init
