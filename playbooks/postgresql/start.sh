@@ -2,13 +2,9 @@
 
 set -Eeuo pipefail
 
-if [ -f /var/lib/postgresql/docker-initialized ]; then
-  echo 'Starting with existing PostgreSQL data.'
-else
-  echo 'Initializing PostgreSQL data.'
-  cp -R /var/lib/postgresql_init/. /var/lib/postgresql
-  chown -R postgres:postgres /var/lib/postgresql
-  touch /var/lib/postgresql/docker-initialized
+# Return orignal PgSQL directory if the mounted one is empty.
+if [ ! "$(ls -A "/var/lib/postgresql/15/main")" ]; then
+  cp -pRT /var/lib/postgresql_init /var/lib/postgresql/15/main
 fi
 
 service postgresql start
