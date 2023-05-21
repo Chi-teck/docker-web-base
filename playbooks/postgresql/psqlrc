@@ -10,7 +10,8 @@
 \set PROMPT2 '%[%033[1;90;1m%]%$%[%033[0m%] '
 
 \set HISTCONTROL ignoreboth
+\set HISTSIZE 50000
 
 \timing on
 
-\set HISTSIZE 50000
+\set QUIET off
