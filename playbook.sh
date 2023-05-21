@@ -62,9 +62,11 @@ for playbook in $playbooks; do
   echo "🚩 Configure services for $playbook"
   dir="/usr/lib/playbooks/$playbook"
   if [ -f $dir/start.sh ]; then
-    envsubst < "$dir/start.sh" > /root/start/$playbook.sh
+    envsubst < "$dir/start.sh" > /root/start/$playbook
   fi
   if [ -f $dir/stop.sh ]; then
-    envsubst < "$dir/stop.sh" > /root/stop/$playbook.sh
+    envsubst < "$dir/stop.sh" > /root/stop/$playbook
   fi
 done
+chmod u+x /root/start/*
+chmod u+x /root/stop/*

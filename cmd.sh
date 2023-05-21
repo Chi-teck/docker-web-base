@@ -5,20 +5,14 @@ shopt -s nullglob
 
 function stop_services {
   echo
-  for cmd in /root/stop/*.sh; do
-    # shellcheck disable=SC1090
-    source $cmd;
-  done
+  run-parts /root/stop
   date +'🏁 Stopped at %c.'
   exit
 }
 trap 'stop_services' exit
 trap 'exit' SIGTERM SIGINT
 
-for cmd in /root/start/*.sh; do
-  # shellcheck disable=SC1090
-  source $cmd;
-done
+run-parts /root/start
 date +'🏁 Started at %c.'
 
 sleep infinity &
