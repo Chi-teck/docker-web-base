@@ -1,0 +1,16 @@
+\set QUIET on
+
+\t off
+\pset linestyle unicode
+\pset border 2
+\pset null 'null'
+\pset format wrapped
+
+\set PROMPT1 '%[%033[1;93;1m%]%n%m:%>%[%033[0m%]/%[%033[1;92;1m%]%/%[%033[0m%]%[%033[1;91;1m%]%x%[%033[0m%]%[%033[1;90;1m%]%$%[%033[0m%] '
+\set PROMPT2 '%[%033[1;90;1m%]%$%[%033[0m%] '
+
+\set HISTCONTROL ignoreboth
+
+\timing on
+
+\set HISTSIZE 50000

@@ -13,5 +13,7 @@ service postgresql start
 sudo -u postgres psql -c"ALTER user postgres WITH PASSWORD '${POSTGRESQL_PASSWORD}'"
 service postgresql stop
 
+cp $DIR/psqlrc "$(pg_config --sysconfdir)"/
+
 # Preserve default PostgreSQL data.
 cp -a /var/lib/postgresql/15/main  /var/lib/postgresql_init
