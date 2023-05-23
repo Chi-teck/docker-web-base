@@ -9,9 +9,12 @@ apt -y update && apt-get install postgresql-15 -y
 # SSL slows down the connection a big deal.
 sed -i 's/ssl = on/ssl = off/g' /etc/postgresql/15/main/postgresql.conf
 
-service postgresql start
-sudo -u postgres psql -c"ALTER user postgres WITH PASSWORD '${POSTGRESQL_PASSWORD}'"
-service postgresql stop
+if [[ -n  ${PLAYBOOK_USER:-} ]]; then
+  service postgresql start
+  sudo -u postgres psql -c"CREATE USER ${USER_NAME} WITH LOGIN CREATEDB PASSWORD '${POSTGRESQL_PASSWORD}';"
+  sudo -u postgres createdb ${USER_NAME} --owner=${USER_NAME}
+  service postgresql stop
+fi
 
 cp $DIR/psqlrc "$(pg_config --sysconfdir)"/
 
