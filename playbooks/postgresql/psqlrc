@@ -7,7 +7,7 @@
 \pset format wrapped
 
 \set PROMPT1 '%[%033[1;93;1m%]%n%m:%>%[%033[0m%]/%[%033[1;92;1m%]%/%[%033[0m%]%[%033[1;91;1m%]%x%[%033[0m%]%[%033[1;90;1m%]%#%[%033[0m%] '
-\set PROMPT2 '%[%033[1;90;1m%]%#%[%033[0m%] '
+\set PROMPT2 '%[%033[1;90;1m%]%R%#%[%033[0m%] '
 
 \set HISTCONTROL ignoreboth
 \set HISTSIZE 50000
