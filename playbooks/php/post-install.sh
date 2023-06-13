@@ -3,15 +3,15 @@
 set -Eeuo pipefail
 
 if [[ -n  ${PLAYBOOK_MARIADB:-} || -n ${PLAYBOOK_MYSQL:-} ]]; then
-  apt install php$PHP_VERSION-mysql
+  apt install -y php$PHP_VERSION-mysql
 fi
 
 if [[ -n  ${PLAYBOOK_POSTGRESQL:-} ]]; then
-  apt install php$PHP_VERSION-pgsql
+  apt install -y php$PHP_VERSION-pgsql
 fi
 
 if [[ -n  ${PLAYBOOK_REDIS:-} ]]; then
-  apt install php-redis
+  apt install -y php-redis
 fi
 
 # Xdebug is not loaded at system boot to avoid performance impact.

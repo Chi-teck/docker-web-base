@@ -2,6 +2,9 @@
 
 set -Eeuo pipefail
 
+>&2 echo 'MySQL does not support Debian 12 yet'
+exit 1
+
 mysql_version=8.22
 
 file=mysql-apt-config_0.${mysql_version}-1_all.deb

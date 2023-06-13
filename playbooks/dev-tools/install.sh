@@ -36,5 +36,5 @@ wget -q -P /tmp $URL && dpkg -i /tmp/task_linux_amd64.deb && rm /tmp/task_linux_
 
 # Configuration.
 cp $DIR/vimrc /etc/vim/vimrc.local
-cp $DIR/vim/colors/termschool.vim /usr/share/vim/vim82/colors
+cp $DIR/vim/colors/termschool.vim /usr/share/vim/vim90/colors
 cp $DIR/gitconfig /etc/gitconfig

@@ -5,7 +5,7 @@ set -Eeuo pipefail
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 
-apt-get update && apt-get -y install \
+apt-get update && apt-get install -y \
     php$PHP_VERSION \
     php$PHP_VERSION-apcu \
     php$PHP_VERSION-bcmath \
