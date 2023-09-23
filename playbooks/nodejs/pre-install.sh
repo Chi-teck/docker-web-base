@@ -2,4 +2,4 @@
 
 set -Eeuo pipefail
 
-export NODEJS_VERSION=${NODEJS_VERSION:-18}
+export NODEJS_VERSION=${NODEJS_VERSION:-20}

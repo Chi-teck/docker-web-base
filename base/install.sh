@@ -10,6 +10,7 @@ apt-get -y install \
   wget \
   zip \
   unzip \
+  gnupg \
   apt-transport-https \
   lsb-release \
   ca-certificates \

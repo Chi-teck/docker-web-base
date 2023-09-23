@@ -8,7 +8,6 @@ apt-get -y install \
     iputils-ping \
     net-tools \
     procps \
-    gnupg \
     git \
     vim \
     mc \
