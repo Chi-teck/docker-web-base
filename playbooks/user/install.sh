@@ -2,7 +2,7 @@
 
 set -Eeuo pipefail
 
-apt-get -y install sudo
+apt update && apt -y install sudo
 
 groupadd -g $USER_GID $USER_NAME
 useradd $USER_NAME -m -u $USER_UID -g $USER_GID -Gsudo -s /bin/bash

@@ -64,10 +64,11 @@ for playbook in $playbooks; do
   dir="/usr/lib/playbooks/$playbook"
   if [ -f $dir/start.sh ]; then
     envsubst < "$dir/start.sh" > /root/start/$playbook
+    chmod u+x /root/start/$playbook
   fi
   if [ -f $dir/stop.sh ]; then
     envsubst < "$dir/stop.sh" > /root/stop/$playbook
+    chmod u+x /root/stop/$playbook
   fi
 done
-chmod u+x /root/start/*
-chmod u+x /root/stop/*
+
