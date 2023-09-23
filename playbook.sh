@@ -58,6 +58,7 @@ for playbook in $playbooks; do
 done
 
 # Configure services.
+mkdir /root/{start,stop}
 for playbook in $playbooks; do
   echo "🚩 Configure services for $playbook"
   dir="/usr/lib/playbooks/$playbook"
