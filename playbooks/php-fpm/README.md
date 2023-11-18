@@ -1,5 +1,10 @@
 ## PHP-FPM playbook
 
+### Available variables
+
+- PHP_FPM_USER
+- PHP_FPM_GROUP
+
 ### Configuration
 
 In order to override default PHP settings create settings file and copy it to the PHP configuration directory as follows.
