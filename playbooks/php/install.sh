@@ -11,8 +11,9 @@ apt-get update && apt-get install -y \
     php$PHP_VERSION-bcmath \
     php$PHP_VERSION-cgi \
     php$PHP_VERSION-curl \
-    php$PHP_VERSION-gd \
+    php$PHP_VERSION-igbinary \
     php$PHP_VERSION-intl \
+    php$PHP_VERSION-gd \
     php$PHP_VERSION-mbstring \
     php$PHP_VERSION-sqlite3 \
     php$PHP_VERSION-xdebug \
@@ -40,6 +41,7 @@ if [[ ${PLAYBOOK_APACHE:-} ]]; then
 elif [[ ${PLAYBOOK_PHP_FPM:-} ]]; then
   sapi='fpm-fcgi'
 fi
+
 # shellcheck disable=SC2016
 esh -s /bin/bash -o /usr/local/bin/xdebug $DIR/xdebug.sh.tpl SAPI=${sapi:-}
 chmod +x /usr/local/bin/xdebug
