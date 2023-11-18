@@ -13,7 +13,7 @@ trap 'stop_services' exit
 trap 'exit' SIGTERM SIGINT
 
 run-parts /root/start
-date +'🏁 Started at %c.'
+date +'🚩 Started at %c.'
 
 sleep infinity &
 wait $!
