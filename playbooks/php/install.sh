@@ -35,10 +35,6 @@ php -r "unlink('composer-setup.php');"
 
 chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
 
-# Install Symfony CLI.
-curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
-apt update && apt install -y symfony-cli
-
 if [[ ${PLAYBOOK_APACHE:-} ]]; then
   sapi='apache2handler'
 elif [[ ${PLAYBOOK_PHP_FPM:-} ]]; then
