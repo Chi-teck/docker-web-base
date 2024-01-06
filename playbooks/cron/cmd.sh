@@ -2,4 +2,4 @@
 
 set -Eeuo pipefail
 
-service cron start
+exec cron -f

@@ -2,4 +2,4 @@
 
 set -Eeuo pipefail
 
-service apache2 stop
+exec nginx -g 'daemon off;'

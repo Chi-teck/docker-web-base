@@ -4,6 +4,8 @@ set -Eeuo pipefail
 
 apt-get -y install apache2
 
+sed -i 's/\($HTTPD ${APACHE_ARGUMENTS}\)/exec \1/' /usr/sbin/apache2ctl
+
 a2enmod rewrite ssl
 echo 'ServerName localhost' >> /etc/apache2/apache2.conf
 

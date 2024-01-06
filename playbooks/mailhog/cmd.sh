@@ -2,4 +2,4 @@
 
 set -Eeuo pipefail
 
-service php$PHP_VERSION-fpm start
+exec mailhog

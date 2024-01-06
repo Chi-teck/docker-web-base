@@ -1,13 +1,11 @@
 FROM debian:bookworm
 
 #--------------------
-ENV DEBIAN_FRONTEND=noninteractive \
-    LANG=C.UTF-8 \
-    LC_ALL=C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 #--------------------
 COPY playbook.sh /usr/bin/playbook
-COPY playbooks /usr/lib/playbooks
+COPY playbooks /tmp/playbook
 
 #--------------------
 COPY base /tmp/base

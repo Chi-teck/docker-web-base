@@ -1,20 +1,25 @@
 #!/usr/bin/env bash
 
 set -Eeuo pipefail
-shopt -s nullglob
 
-function stop_services {
-  echo
-  run-parts /root/stop
-  date +'🏁 Stopped at %c.'
-  exit
-}
-trap 'stop_services' exit
-trap 'exit' SIGTERM SIGINT
+if [[ -z ${SERVICE:-} ]]; then
+  echo 'Service is not configured. Sleeping...'
+  trap 'exit' SIGTERM SIGINT
+  sleep infinity &
+  wait
+fi
 
-run-parts /root/start
-date +'🚩 Started at %c.'
+dir=/usr/lib/playbook/${SERVICE}
+if [[ ! -d $dir ]]; then
+  >&2 echo "${SERVICE} is not installed."
+  exit 1
+fi
 
-sleep infinity &
-wait $!
+cmd=$dir/cmd.sh
+if [[ ! -x $cmd ]]; then
+  >&2 echo "${SERVICE} cannot be started as a service."
+  exit 1
+fi
 
+echo "Starting $SERVICE..."
+exec $cmd

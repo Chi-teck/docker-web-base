@@ -2,4 +2,4 @@
 
 set -Eeuo pipefail
 
-service nginx start
+exec php-fpm -F
