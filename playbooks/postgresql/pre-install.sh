@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-set -Eeuo pipefail
-
-export POSTGRESQL_USER=${POSTGRESQL_PASSWORD:-$USER_NAME}
-export POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD:-123}
