@@ -1,13 +1,12 @@
-FROM attr/dev
+FROM debian:bookworm-slim
 
 ARG PHP_VERSION=8.3
+ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8
 
-USER root
-
-RUN apt update && apt install lsb-release && \
+RUN apt update && apt install -y lsb-release wget && \
     wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
-    apt purge -y --auto-remove lsb-release
+    apt purge -y --auto-remove lsb-release wget
 
 RUN apt update && apt install -y \
     php$PHP_VERSION \
@@ -23,20 +22,10 @@ RUN apt update && apt install -y \
     php$PHP_VERSION-xdebug \
     php$PHP_VERSION-xml \
     php$PHP_VERSION-zip \
-    php$PHP_VERSION-xdebug \
     php$PHP_VERSION-fpm \
     php$PHP_VERSION-mysql \
     php$PHP_VERSION-pgsql \
     php$PHP_VERSION-redis
-
-COPY 30-local-cli.ini /etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
-COPY 30-local-fpm.ini /etc/php/$PHP_VERSION/fpm/conf.d/30-local.ini
-
-# ini_file=/etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
-# cp $DIR/30-local.ini $ini_file
-# if [[ -n ${PLAYBOOK_MAILHOG:-} ]]; then
-  # echo 'sendmail_path = /usr/local/bin/mhsendmail' >> $ini_file
-# fi
 
 # Install Composer.
 RUN cd /tmp && \
@@ -45,9 +34,6 @@ RUN cd /tmp && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
     chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
-
-COPY xdebug.sh /usr/local/bin/xdebug
-RUN chmod +x /usr/local/bin/xdebug && phpdismod -s ALL xdebug
 
 # Listen TCP port instead of socket.
 RUN sed -i "s/^listen = .*$/listen = 9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf

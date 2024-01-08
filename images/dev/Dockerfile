@@ -8,22 +8,11 @@ ARG NODEJS_VERSION=20
 
 ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8
 
-# RUN apt-get update && apt-get -y install \
-#  apt-transport-https \
-#  lsb-release \
-#  ca-certificates \
-#  gettext
-
-# Install shell template engine.
-# RUN wget -q -O /usr/local/bin/esh https://raw.githubusercontent.com/jirutka/esh/v0.3.2/esh && \
-#    echo '9084e3e8e70e4ea81c40cd1cf85559196c0fa2cc /usr/local/bin/esh' | sha1sum -c && \
-#    chmod +x /usr/local/bin/esh
-
 # Configuration.
 COPY bashrc /tmp
 RUN cat /tmp/bashrc >> /etc/skel/.bashrc && rm /tmp/bashrc
 COPY vimrc /etc/vim/vimrc.local
-COPY vim/colors/termschool.vim /usr/share/vim/vim90/colors
+COPY termschool.vim /usr/share/vim/vim90/colors/termschool.vim
 COPY gitconfig /etc/gitconfig
 COPY mc.ini /etc/mc/mc.ini
 RUN echo 'export PS1="\[\e[101;39m\] \u@\h \[\e[0m\]\[\e[103;30m\] \w \[\e[0m\]\n\[\e[01;30m\]$ \[\e[0m\]"' >> /root/.bashrc
@@ -74,6 +63,11 @@ RUN wget -q https://raw.githubusercontent.com/LuRsT/hr/master/hr -O /usr/local/b
 # Install Task.
 RUN URL=$(curl -s /tmp https://api.github.com/repos/go-task/task/releases/latest | grep "browser_download_url.*task_linux_amd64\.deb" | cut -d : -f 2,3 | tr -d \") && \
     wget -q -P /tmp $URL && dpkg -i /tmp/task_linux_amd64.deb && rm /tmp/task_linux_amd64.deb
+
+# Install mhsend
+RUN wget --quiet https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 && \
+    chmod +x mhsendmail_linux_amd64 && \
+    mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail
 
 # Install Node JS
 RUN mkdir -p /etc/apt/keyrings && \
