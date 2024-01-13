@@ -4,9 +4,17 @@ ARG PHP_VERSION=8.3
 
 USER root
 
+RUN apt-get update && apt-get install -y apache2
+
+COPY create-cert.sh /usr/lib/create-cert.sh
+RUN /usr/lib/create-cert.sh
+
+RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
+
 RUN apt update && apt install lsb-release && \
     wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
+    a2enmod rewrite ssl && \
     apt purge -y --auto-remove lsb-release
 
 RUN apt update && apt install -y \
@@ -26,13 +34,11 @@ RUN apt update && apt install -y \
     php$PHP_VERSION-xdebug \
     php$PHP_VERSION-mysql \
     php$PHP_VERSION-pgsql \
-    php$PHP_VERSION-redis
+    php$PHP_VERSION-redis \
+    libapache2-mod-php$PHP_VERSION
 
 COPY 30-local-cli.ini /etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
-COPY 30-local-fpm.ini /etc/php/$PHP_VERSION/apache/conf.d/30-local.ini
-
-# ini_file=/etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
-# cp $DIR/30-local.ini $ini_file
+COPY 30-local-apache.ini /etc/php/$PHP_VERSION/apache/conf.d/30-local.ini
 
 # Install Composer.
 RUN cd /tmp && \
@@ -45,10 +51,5 @@ RUN cd /tmp && \
 COPY xdebug.sh /usr/local/bin/xdebug
 RUN chmod +x /usr/local/bin/xdebug && phpdismod -s ALL xdebug
 
-# Listen TCP port instead of socket.
-RUN sed -i "s/^listen = .*$/listen = 9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
-
-# Create an executable that does not require knowing PHP version.
-RUN ln -s /usr/sbin/php-fpm${PHP_VERSION} /usr/local/bin/php-fpm
-
-CMD ["php-fpm", "-F"]
+COPY apache2-foreground.sh /usr/local/bin/apache2-foreground
+CMD ["apache2-foreground"]
