@@ -15,7 +15,7 @@ COPY vimrc /etc/vim/vimrc.local
 COPY termschool.vim /usr/share/vim/vim90/colors/termschool.vim
 COPY gitconfig /etc/gitconfig
 COPY mc.ini /etc/mc/mc.ini
-RUN echo 'export PS1="\[\e[101;39m\] \u@\h \[\e[0m\]\[\e[103;30m\] \w \[\e[0m\]\n\[\e[01;30m\]$ \[\e[0m\]"' >> /root/.bashrc
+RUN echo 'export PS1="\[\e[101;39m\] \u@\H \[\e[0m\]\[\e[103;30m\] \w \[\e[0m\]\n\[\e[01;30m\]$ \[\e[0m\]"' >> /root/.bashrc
 
 RUN apt update && apt -y install sudo && \
     groupadd -g $USER_GID $USER_NAME && \

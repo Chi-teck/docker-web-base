@@ -52,4 +52,5 @@ RUN sed -i "s/^listen = .*$/listen = 9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/w
 # Create an executable that does not require knowing PHP version.
 RUN ln -s /usr/sbin/php-fpm${PHP_VERSION} /usr/local/bin/php-fpm
 
+STOPSIGNAL SIGQUIT
 CMD ["php-fpm", "-F"]
