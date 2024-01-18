@@ -4,14 +4,14 @@ ARG PHP_VERSION=8.3
 
 USER root
 
-RUN apt-get update && apt-get install -y apache2
+RUN apt-get update && apt-get install -y apache2 && \
+    sed -i 's#/var/www/html#/var/www#g' /etc/apache2/sites-available/*.conf
 
 COPY create-cert.sh /usr/lib/create-cert.sh
 RUN /usr/lib/create-cert.sh
 
-RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
-
-RUN apt update && apt install -y lsb-release wget && \
+RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf && \
+    apt update && apt install -y lsb-release wget && \
     wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
     a2enmod rewrite ssl && \
@@ -38,7 +38,7 @@ RUN apt update && apt install -y \
     libapache2-mod-php$PHP_VERSION
 
 COPY 30-local-cli.ini /etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
-COPY 30-local-apache.ini /etc/php/$PHP_VERSION/apache/conf.d/30-local.ini
+COPY 30-local-apache.ini /etc/php/$PHP_VERSION/apache2/conf.d/30-local.ini
 
 # Install Composer.
 RUN cd /tmp && \

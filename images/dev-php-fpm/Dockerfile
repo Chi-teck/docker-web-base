@@ -30,7 +30,7 @@ RUN apt update && apt install -y \
     php$PHP_VERSION-fpm
 
 COPY 30-local-cli.ini /etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
-COPY 30-local-fpm.ini /etc/php/$PHP_VERSION/apache/conf.d/30-local.ini
+COPY 30-local-fpm.ini /etc/php/$PHP_VERSION/fpm/conf.d/30-local.ini
 
 # ini_file=/etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
 # cp $DIR/30-local.ini $ini_file

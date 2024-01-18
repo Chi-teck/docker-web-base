@@ -19,4 +19,4 @@ else
   exit 1
 fi
 
-#kill -USR2 1
+apachectl -k graceful
