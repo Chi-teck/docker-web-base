@@ -52,6 +52,7 @@ RUN apt update && apt -y install \
     mariadb-client \
     postgresql-client \
     gnupg && \
+    btop && \
     mv /usr/bin/batcat /usr/bin/bat
 
 COPY psqlrc /etc/postgresql-common/
