@@ -51,8 +51,8 @@ RUN apt update && apt -y install \
     redis-tools \
     mariadb-client \
     postgresql-client \
+    btop \
     gnupg && \
-    btop && \
     mv /usr/bin/batcat /usr/bin/bat
 
 COPY psqlrc /etc/postgresql-common/
