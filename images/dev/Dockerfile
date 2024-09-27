@@ -51,6 +51,7 @@ RUN apt update && apt -y install \
     redis-tools \
     mariadb-client \
     postgresql-client \
+    micro \
     btop \
     gnupg && \
     mv /usr/bin/batcat /usr/bin/bat
