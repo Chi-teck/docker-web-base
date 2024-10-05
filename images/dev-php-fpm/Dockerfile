@@ -46,6 +46,19 @@ RUN cd /tmp && \
 COPY xdebug.sh /usr/local/bin/xdebug
 RUN chmod +x /usr/local/bin/xdebug && phpdismod -s ALL xdebug
 
+# Install SPX
+RUN apt install -y zlib1g-dev php-dev && \
+    cd /tmp && \
+    git clone https://github.com/NoiseByNorthwest/php-spx.git && \
+    cd php-spx && \
+    git checkout release/latest && \
+    phpize && \
+    ./configure && \
+    make && make install && \
+    rm -r /tmp/php-spx
+COPY 20-spx-cli.ini /etc/php/$PHP_VERSION/cli/conf.d/20-spx.ini
+COPY 20-spx-fpm.ini /etc/php/$PHP_VERSION/fpm/conf.d/20-spx.ini
+
 # Listen TCP port instead of socket.
 RUN sed -i "s/^listen = .*$/listen = 9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
 
