@@ -53,8 +53,10 @@ RUN apt update && apt -y install \
     postgresql-client \
     micro \
     btop \
-    gnupg && \
-    mv /usr/bin/batcat /usr/bin/bat
+    gnupg \
+    fd-find && \
+    ln -s /usr/bin/fdfind /usr/bin/fd && \ 
+    ln -s /usr/bin/batcat /usr/bin/bat
 
 COPY psqlrc /etc/postgresql-common/
 
