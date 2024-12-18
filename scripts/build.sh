@@ -6,7 +6,7 @@ function wb_label {
   echo -e "\n\e[30;46m $* \e[0m\n"
 }
 
-readonly php_versions='7.3 7.4 8.0 8.1 8.2 8.3'
+readonly php_versions='7.3 7.4 8.0 8.1 8.2 8.3 8.4'
 readonly php_latest_version='8.3'
 images_dir=$(dirname "$(readlink -f "$0")")/../images
 
