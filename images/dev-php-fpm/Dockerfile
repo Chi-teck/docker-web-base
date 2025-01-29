@@ -47,7 +47,7 @@ COPY xdebug.sh /usr/local/bin/xdebug
 RUN chmod +x /usr/local/bin/xdebug && phpdismod -s ALL xdebug
 
 # Install SPX
-RUN apt install -y zlib1g-dev php-dev && \
+RUN apt install -y zlib1g-dev php$PHP_VERSION-dev && \
     cd /tmp && \
     git clone https://github.com/NoiseByNorthwest/php-spx.git && \
     cd php-spx && \

@@ -1,6 +1,6 @@
 FROM debian:bookworm-slim
 
-ARG PHP_VERSION=8.3
+ARG PHP_VERSION=8.4
 ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 RUN apt update && apt install -y lsb-release wget && \
