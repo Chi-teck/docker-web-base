@@ -4,9 +4,9 @@ ARG PHP_VERSION=8.4
 ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 RUN apt update && apt install -y lsb-release wget && \
-    wget -O /etc/apt/trusted.gpg.d/php.gpg https://mirror.yandex.ru/mirrors/packages.sury.org/php/apt.gpg && \
-    echo "deb https://mirror.yandex.ru/mirrors/packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/surry-mirror.list && \
-    apt purge -y --auto-remove lsb-release
+    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
+    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
+    apt purge -y --auto-remove lsb-release wget
 
 RUN apt update && apt install -y \
     php$PHP_VERSION \
