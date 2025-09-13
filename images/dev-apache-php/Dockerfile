@@ -12,8 +12,8 @@ RUN /usr/lib/create-cert.sh
 
 RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf && \
     apt update && apt install -y lsb-release wget && \
-    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
-    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
+    wget -O /etc/apt/trusted.gpg.d/php.gpg https://mirror.yandex.ru/mirrors/packages.sury.org/php/apt.gpg && \
+    echo "deb https://mirror.yandex.ru/mirrors/packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/surry-mirror.list && \
     a2enmod rewrite ssl && \
     apt purge -y --auto-remove lsb-release
 
