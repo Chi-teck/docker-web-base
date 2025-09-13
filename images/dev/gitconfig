@@ -18,7 +18,7 @@
   lineNumber = true
 [alias]
   l = log --graph --abbrev-commit --decorate --date=relative --format=format:\"%C(bold blue)%h%C(reset) - %C(yellow)%ar%C(reset) - %C(green)%an%C(reset) %C(white)%s%C(reset) %C(auto)%d%C(reset)\"
-  d = !git --no-pager dif
+  d = !git --no-pager diff
 [clean]
   requireForce = false
 [push]
