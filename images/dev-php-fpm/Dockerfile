@@ -35,12 +35,9 @@ COPY 30-local-fpm.ini /etc/php/$PHP_VERSION/fpm/conf.d/30-local.ini
 # ini_file=/etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
 # cp $DIR/30-local.ini $ini_file
 
-# Install Composer.
 RUN cd /tmp && \
-    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
-    php composer-setup.php && \
-    php -r "unlink('composer-setup.php');" && \
+    curl -o composer.phar https://getcomposer.org/download/2.8.12/composer.phar && \
+    echo "f446ea719708bb85fcbf4ef18def5d0515f1f9b4d703f6d820c9c1656e10a2f2  composer.phar" | sha256sum -c && \
     chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
 
 COPY xdebug.sh /usr/local/bin/xdebug

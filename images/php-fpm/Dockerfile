@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 ARG PHP_VERSION=8.4
 ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8
@@ -27,12 +27,9 @@ RUN apt update && apt install -y \
     php$PHP_VERSION-pgsql \
     php$PHP_VERSION-redis
 
-# Install Composer.
 RUN cd /tmp && \
-    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
-    php composer-setup.php && \
-    php -r "unlink('composer-setup.php');" && \
+    php -r "copy('https://getcomposer.org/download/2.8.12/composer.phar', 'composer.phar');" && \
+    echo "f446ea719708bb85fcbf4ef18def5d0515f1f9b4d703f6d820c9c1656e10a2f2  composer.phar" | sha256sum -c && \
     chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
 
 # Listen TCP port instead of socket.

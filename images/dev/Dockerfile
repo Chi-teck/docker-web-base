@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 ARG USER_NAME=wb
 ARG USER_UID=1000
