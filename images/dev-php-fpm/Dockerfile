@@ -56,6 +56,9 @@ RUN apt install -y zlib1g-dev php$PHP_VERSION-dev && \
 COPY 20-spx-cli.ini /etc/php/$PHP_VERSION/cli/conf.d/20-spx.ini
 COPY 20-spx-fpm.ini /etc/php/$PHP_VERSION/fpm/conf.d/20-spx.ini
 
+# Install dumps function.
+COPY local.php /usr/share/php/local.php
+
 # Listen TCP port instead of socket.
 RUN sed -i "s/^listen = .*$/listen = 9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
 

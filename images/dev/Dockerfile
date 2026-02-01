@@ -55,7 +55,7 @@ RUN apt update && apt -y install \
     btop \
     gnupg \
     fd-find && \
-    ln -s /usr/bin/fdfind /usr/bin/fd && \ 
+    ln -s /usr/bin/fdfind /usr/bin/fd && \
     ln -s /usr/bin/batcat /usr/bin/bat
 
 COPY psqlrc /etc/postgresql-common/
@@ -65,13 +65,8 @@ RUN wget -q https://raw.githubusercontent.com/LuRsT/hr/master/hr -O /usr/local/b
     chmod +x /usr/local/bin/hr
 
 # Install Task.
-RUN URL=$(curl -s /tmp https://api.github.com/repos/go-task/task/releases/latest | grep "browser_download_url.*task_linux_amd64\.deb" | cut -d : -f 2,3 | tr -d \") && \
-    wget -q -P /tmp $URL && dpkg -i /tmp/task_linux_amd64.deb && rm /tmp/task_linux_amd64.deb
-
-# Install mhsend
-RUN wget --quiet https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 && \
-    chmod +x mhsendmail_linux_amd64 && \
-    mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail
+RUN URL=$(curl -fs /tmp https://api.github.com/repos/go-task/task/releases/latest | grep "browser_download_url.*task_.*_linux_amd64\.deb" | cut -d : -f 2,3 | tr -d \") && \
+    curl $URL -Lfo /tmp/task.deb &&  dpkg -i /tmp/task.deb && rm /tmp/task.deb
 
 # Install Node JS
 RUN mkdir -p /etc/apt/keyrings && \
