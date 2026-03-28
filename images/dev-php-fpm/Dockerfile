@@ -5,7 +5,7 @@ ARG PHP_VERSION=8.4
 USER root
 
 RUN apt update && apt install -y lsb-release && \
-    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
+    curl -fsSL https://packages.sury.org/php/apt.gpg -o /etc/apt/trusted.gpg.d/php.gpg && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
     apt purge -y --auto-remove lsb-release
 
@@ -23,7 +23,6 @@ RUN apt update && apt install -y \
     php$PHP_VERSION-xdebug \
     php$PHP_VERSION-xml \
     php$PHP_VERSION-zip \
-    php$PHP_VERSION-xdebug \
     php$PHP_VERSION-mysql \
     php$PHP_VERSION-pgsql \
     php$PHP_VERSION-redis \
@@ -31,9 +30,6 @@ RUN apt update && apt install -y \
 
 COPY 30-local-cli.ini /etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
 COPY 30-local-fpm.ini /etc/php/$PHP_VERSION/fpm/conf.d/30-local.ini
-
-# ini_file=/etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
-# cp $DIR/30-local.ini $ini_file
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
