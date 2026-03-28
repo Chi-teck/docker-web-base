@@ -27,10 +27,7 @@ RUN apt update && apt install -y \
     php$PHP_VERSION-pgsql \
     php$PHP_VERSION-redis
 
-RUN cd /tmp && \
-    php -r "copy('https://getcomposer.org/download/2.8.12/composer.phar', 'composer.phar');" && \
-    echo "f446ea719708bb85fcbf4ef18def5d0515f1f9b4d703f6d820c9c1656e10a2f2  composer.phar" | sha256sum -c && \
-    chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Listen TCP port instead of socket.
 RUN sed -i "s/^listen = .*$/listen = 9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf

@@ -21,7 +21,5 @@
   d = !git --no-pager diff
 [clean]
   requireForce = false
-[push]
-  default = upstream
 [pull]
   rebase = true

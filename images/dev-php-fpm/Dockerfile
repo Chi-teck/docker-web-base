@@ -35,10 +35,7 @@ COPY 30-local-fpm.ini /etc/php/$PHP_VERSION/fpm/conf.d/30-local.ini
 # ini_file=/etc/php/$PHP_VERSION/cli/conf.d/30-local.ini
 # cp $DIR/30-local.ini $ini_file
 
-RUN cd /tmp && \
-    curl -o composer.phar https://getcomposer.org/download/2.8.12/composer.phar && \
-    echo "f446ea719708bb85fcbf4ef18def5d0515f1f9b4d703f6d820c9c1656e10a2f2  composer.phar" | sha256sum -c && \
-    chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY xdebug.sh /usr/local/bin/xdebug
 RUN chmod +x /usr/local/bin/xdebug && phpdismod -s ALL xdebug
