@@ -37,12 +37,9 @@ fi
 for image in dev-apache-php dev-php-fpm php-fpm; do
   for php_version in $php_versions; do
     if [[ $target = all || $target = "$image" ]]; then
-
       image_id=attr/$image:$php_version
       wb_label $image_id
       docker build -t $image_id --build-arg="PHP_VERSION=$php_version" $images_dir/$image
-      [[ $push = true ]] && docker push $image_id
-      [[ $remove = true ]] && (docker rmi $image_id || true)
 
       if [[ $php_version = "$php_latest_version" ]]; then
         docker tag "attr/$image:$php_version" "attr/$image:latest"
@@ -50,6 +47,8 @@ for image in dev-apache-php dev-php-fpm php-fpm; do
         [[ $remove = true ]] && (docker rmi "attr/$image:latest" || true)
       fi
 
+      [[ $push = true ]] && docker push $image_id
+      [[ $remove = true ]] && (docker rmi $image_id || true)
     fi
   done
 done
