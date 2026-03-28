@@ -11,8 +11,6 @@ ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8
 # Configuration.
 COPY bashrc /tmp
 RUN cat /tmp/bashrc >> /etc/skel/.bashrc && rm /tmp/bashrc
-COPY vimrc /etc/vim/vimrc.local
-COPY termschool.vim /usr/share/vim/vim90/colors/termschool.vim
 COPY gitconfig /etc/gitconfig
 COPY mc.ini /etc/mc/mc.ini
 RUN echo 'export PS1="\[\e[101;39m\] \u@\H \[\e[0m\]\[\e[103;30m\] \w \[\e[0m\]\n\[\e[01;30m\]$ \[\e[0m\]"' >> /root/.bashrc
@@ -38,7 +36,6 @@ RUN apt update && apt -y install \
     git \
     vim \
     mc \
-    silversearcher-ag \
     man \
     jq \
     patch \
@@ -75,4 +72,4 @@ RUN mkdir -p /etc/apt/keyrings && \
     apt update && apt install -y nodejs && \
     npm install --global yarn
 
-USER wb
+USER $USER_NAME
