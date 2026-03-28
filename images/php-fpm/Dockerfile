@@ -12,14 +12,12 @@ RUN apt update && apt install -y \
     php$PHP_VERSION \
     php$PHP_VERSION-apcu \
     php$PHP_VERSION-bcmath \
-    php$PHP_VERSION-cgi \
     php$PHP_VERSION-curl \
     php$PHP_VERSION-igbinary \
     php$PHP_VERSION-intl \
     php$PHP_VERSION-gd \
     php$PHP_VERSION-mbstring \
     php$PHP_VERSION-sqlite3 \
-    php$PHP_VERSION-xdebug \
     php$PHP_VERSION-xml \
     php$PHP_VERSION-zip \
     php$PHP_VERSION-fpm \

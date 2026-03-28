@@ -25,16 +25,15 @@ do
   fi
 done
 
-for image in dev nginx; do
-  if [[ $target = all || $target = "$image" ]]; then
-    image_id=attr/$image
-    wb_label $image_id
-    docker build -t $image_id $images_dir/$image
-    [[ $push = true ]] && docker push $image_id
-    [[ $remove = true ]] && (docker rmi $image_id || true)
-  fi
-done
+# Build base dev image.
+if [[ $target = all || $target = dev ]]; then
+  wb_label attr/dev
+  docker build -t attr/dev "$images_dir/dev"
+  [[ $push = true ]] && docker push attr/dev
+  [[ $remove = true ]] && (docker rmi attr/dev || true)
+fi
 
+# Build PHP images for each version in the matrix.
 for image in dev-apache-php dev-php-fpm php-fpm; do
   for php_version in $php_versions; do
     if [[ $target = all || $target = "$image" ]]; then
@@ -46,11 +45,9 @@ for image in dev-apache-php dev-php-fpm php-fpm; do
       [[ $remove = true ]] && (docker rmi $image_id || true)
 
       if [[ $php_version = "$php_latest_version" ]]; then
-        image_id=attr/$image:latest
-        wb_label $image_id
-        docker build -t $image_id --build-arg="PHP_VERSION=$php_version" $images_dir/$image
-        [[ $push = true ]] && docker push $image_id
-        [[ $remove = true ]] && (docker rmi $image_id || true)
+        docker tag "attr/$image:$php_version" "attr/$image:latest"
+        [[ $push = true ]] && docker push "attr/$image:latest"
+        [[ $remove = true ]] && (docker rmi "attr/$image:latest" || true)
       fi
 
     fi
