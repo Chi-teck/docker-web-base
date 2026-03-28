@@ -8,10 +8,16 @@ GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWUPSTREAM=auto
 __exit_indicator() { if [ $? = 0 ]; then echo -e "\033[32m✔"; else echo -e "\033[38;2;255;100;100m✘"; fi; }
-export PS1="\[\e[48;2;80;220;80;30m\] \u@\H \[\e[0m\]\[\e[103;30m\] \w \[\e[0m\]\[\e[48;2;120;230;230;30m\]\$(__git_ps1 ' %s ')\[\e[0m\] \$(__exit_indicator)\[\e[0m\]\n\[\e[01;30m\]$ \[\e[0m\]"
+__ps1_user="\[\e[48;2;20;60;20;38;2;80;220;80m\] \u@\H \[\e[0m\]"
+__ps1_dir="\[\e[48;2;60;55;15;38;2;220;200;60m\] \w \[\e[0m\]"
+__ps1_git="\[\e[48;2;20;60;60;38;2;120;230;230m\]\$(__git_ps1 ' %s ')\[\e[0m\]"
+__ps1_status="\$(__exit_indicator)\[\e[0m\]"
+__ps1_prompt="\[\e[01;30m\]$ \[\e[0m\]"
+export PS1="${__ps1_user}${__ps1_dir}${__ps1_git} ${__ps1_status}\n${__ps1_prompt}"
+export PS2="\[\e[01;30m\]▷ \[\e[0m\]"
 
 HISTCONTROL=ignoreboth
 HISTSIZE=15000
 HISTFILESIZE=15000
-HISTTIMEFORMAT='%d.%m.%y %T '
+HISTTIMEFORMAT='%Y-%m-%d %T '
 
